@@ -1,0 +1,11 @@
+spring:
+ redis:
+  hot: localhost
+  password:
+  port: 6379
+  lettuce:
+   shutdown-time: 30000
+   pool:
+    max-active: 30
+    max-idle: 8
+    mim-idle: 0
