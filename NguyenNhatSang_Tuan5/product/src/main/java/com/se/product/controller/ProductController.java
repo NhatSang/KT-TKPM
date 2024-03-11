@@ -19,12 +19,12 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@GetMapping
+	@GetMapping("/all")
 	public List<Product> getAllProducts(){
 		return productService.getAllProducts();
 	}
 	
-	@PostMapping
+	@PostMapping("/save")
 	public String save(@RequestBody Product product) {
 		productService.save(product);
 		return "true";
