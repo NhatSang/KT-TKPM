@@ -27,4 +27,8 @@ public class ProductRepository {
 	public List<Product> getAllProducts() {
 		return hashOperations.values("PRODUCT");
 	}
+	
+	public Product getProductById(int id) {
+		return (Product) hashOperations.get("PRODUCT", id);
+	}
 }

@@ -18,6 +18,10 @@ public class UserService {
 	@Autowired
 	private JWTService jwtService;
 
+	public User getUserById(int id) {
+		return repository.findById(id);
+	}
+
 	public String save(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		repository.save(user);
