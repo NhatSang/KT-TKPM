@@ -12,18 +12,18 @@ public class RetryService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@Autowired
-	private Retry retryConfig;
+//	@Autowired
+//	private Retry retryConfig;
 
 	public String getProducts() {
-		try {
-			return retryConfig.executeSupplier(() -> {
+//		try {
+//			return retryConfig.executeSupplier(() -> {
 				return restTemplate.getForObject("http://localhost:8080/products/", String.class);
-			});
-		} catch (Exception e) {
-			// TODO: handle exception
-			return "Error: " + e;
-		}
+//			});
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			return "Error: " + e;
+//		}
 
 	}
 
