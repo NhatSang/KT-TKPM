@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: demoDocker
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - appnet
+  mysql2:
+    image: mysql:latest
+    restart: always
+    container_name: mysql2
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: courseDocker
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql2_data:/var/lib/mysql
+    networks:
+      - appnet
+  student-service:
+    restart: always
+    build:
+      context: ./Student
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MSSQL_PASSWORD: root
+    networks:
+      - appnet
+  course-service:
+    restart: always
+    build:
+      context: ./Course
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql2
+    environment:
+      MYSQL_HOST: mysql2
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MSSQL_PASSWORD: root
+    networks:
+      - appnet
+volumes:
+  mysql_data:
+  mysql2_data:
+networks:
+  appnet:
